@@ -16,8 +16,10 @@
       height: 100vh;
     }
     #flipbook {
-      width: 90%;
-      height: 90%;
+      width: 95vw;   /* mas malaki */
+      height: 95vh;  /* mas malaki */
+      max-width: 1400px;  /* para di sobra sa malalaking screen */
+      max-height: 95vh;
     }
     #flipbook .page {
       background: white;
@@ -27,8 +29,8 @@
     #flipbook .page img {
       width: 100%;
       height: 100%;
-      object-fit: contain;  /* ✅ buo lagi image, walang putol */
-      background: #fff;     /* ✅ para white ang bakanteng space */
+      object-fit: contain;  /* buo lagi image */
+      background: #fff;     /* white padding if needed */
       display: block;
     }
     .nav {
@@ -73,8 +75,8 @@
     $(function(){
       // init flipbook
       $("#flipbook").turn({
-        width: window.innerWidth * 0.9,
-        height: window.innerHeight * 0.9,
+        width: $("#flipbook").width(),
+        height: $("#flipbook").height(),
         autoCenter: true,
         display: 'double',
         elevation: 0,
@@ -95,6 +97,11 @@
       document.getElementById("next").addEventListener("click", () => {
         $("#flipbook").turn("next");
       });
+    });
+
+    // resize support para di lumiit pag nag-resize
+    window.addEventListener("resize", () => {
+      $("#flipbook").turn("size", $("#flipbook").width(), $("#flipbook").height());
     });
   </script>
 
