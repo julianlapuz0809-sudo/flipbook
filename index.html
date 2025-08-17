@@ -9,9 +9,10 @@
   <style>
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
       width: 100%;
-      background: #ffffff;  /* all white */
+      background: #ffffff;  /* white background */
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -19,8 +20,8 @@
     }
 
     #flipbook {
-      width: 100%;
-      height: 100%;
+      max-width: 90%;    /* scale flipbook to 90% of screen width */
+      max-height: 95%;   /* scale flipbook to 95% of screen height */
     }
 
     #flipbook .page {
@@ -78,6 +79,12 @@
 
   <!-- JS -->
   <script>
+    function resizeFlipbook() {
+      const winWidth = window.innerWidth * 0.9;  // 90% of window width
+      const winHeight = window.innerHeight * 0.95; // 95% of window height
+      $("#flipbook").turn("size", winWidth, winHeight);
+    }
+
     function initFlipbook() {
       $("#flipbook").turn({
         width: $("#flipbook").width(),
@@ -87,6 +94,7 @@
         elevation: 0,
         gradients: false
       });
+      resizeFlipbook();
     }
 
     $(function(){
@@ -109,7 +117,7 @@
 
       // Responsive resize
       window.addEventListener("resize", () => {
-        $("#flipbook").turn("size", $("#flipbook").width(), $("#flipbook").height());
+        resizeFlipbook();
       });
     });
   </script>
